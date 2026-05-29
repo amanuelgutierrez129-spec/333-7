@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCLMax | Professional Financial Consulting Services</title>
+    <style>
+        :root {
+            --tan-brown: #8B5A3C;
+            --bean-pink: #D8A7B1;
+            --paper-white: #F5F2EB;
+            --ink-gray: #2C2C2C;
+            --dark-purple: #4A3A5C;
+            --gilded-gold: #C8A97E;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        body {
+            background-color: var(--paper-white);
+            color: var(--ink-gray);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--tan-brown), var(--dark-purple));
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+        }
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gilded-gold);
+            letter-spacing: 1px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+        }
+        .nav-menu a {
+            color: var(--paper-white);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .nav-menu a:hover {
+            background-color: rgba(216, 167, 177, 0.3);
+            color: var(--bean-pink);
+        }
+        .mobile-menu-btn {
+            display: none;
+            font-size: 28px;
+            color: var(--paper-white);
+            cursor: pointer;
+        }
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background-color: var(--ink-gray);
+            width: 100%;
+            padding: 20px;
+            gap: 15px;
+        }
+        .mobile-nav a {
+            color: var(--paper-white);
+            text-decoration: none;
+            font-size: 17px;
+            padding: 10px;
+        }
+        section {
+            padding: 100px 0;
+            scroll-margin-top: 75px;
+        }
+        .hero {
+            margin-top: 75px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(44,44,44,0.6), rgba(74,58,92,0.6)), url(https://amanuelgutierrez129-spec.github.io/333-7/27.jpg) center/cover no-repeat;
+            color: #fff;
+        }
+        .hero-content h1 {
+            font-size: 52px;
+            color: var(--gilded-gold);
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 18px;
+            max-width: 650px;
+            margin-bottom: 30px;
+            color: var(--paper-white);
+        }
+        /* 新增子描述样式 */
+        .hero-content .sub-desc {
+            font-size: 16px;
+            color: var(--bean-pink);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--tan-brown);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 1px solid var(--gilded-gold);
+        }
+        .btn-primary:hover {
+            background-color: var(--bean-pink);
+            color: var(--ink-gray);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--tan-brown);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(to right, var(--bean-pink), var(--gilded-gold));
+            position: absolute;
+            bottom: -10px;
+            left: 15%;
+        }
+        /* 新增板块副标题样式 */
+        .section-title .sub-title {
+            font-size: 18px;
+            color: var(--dark-purple);
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(139,90,60,0.25);
+        }
+        .about-text h3 {
+            font-size: 26px;
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            color: var(--ink-gray);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        /* 新增关于我们子描述列表 */
+        .about-features {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .about-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .about-feature-item .icon {
+            color: var(--gilded-gold);
+            font-size: 20px;
+            margin-top: 3px;
+        }
+        .services-wrap {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background-color: var(--paper-white);
+            padding: 35px 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(74,58,92,0.12);
+            border-top: 4px solid var(--bean-pink);
+            transition: 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-top-color: var(--gilded-gold);
+        }
+        .service-card h4 {
+            font-size: 22px;
+            color: var(--tan-brown);
+            margin: 15px 0;
+        }
+        .service-card p {
+            color: var(--dark-purple);
+        }
+        /* 新增服务卡片子描述 */
+        .service-card .service-sub-desc {
+            font-size: 14px;
+            color: var(--ink-gray);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(139,90,60,0.1);
+        }
+        .data-module {
+            background-color: var(--paper-white);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(200,169,126,0.3);
+        }
+        .data-label {
+            color: var(--dark-purple);
+            font-weight: 500;
+        }
+        .data-value {
+            color: var(--ink-gray);
+            font-weight: 700;
+            color: var(--gilded-gold);
+        }
+        /* 新增数据模块子描述 */
+        .data-desc {
+            text-align: center;
+            font-size: 16px;
+            color: var(--dark-purple);
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-info h4 {
+            font-size: 24px;
+            color: var(--tan-brown);
+            margin-bottom: 25px;
+        }
+        .contact-info p {
+            margin: 12px 0;
+            font-size: 17px;
+            color: var(--dark-purple);
+        }
+        .contact-info strong {
+            color: var(--ink-gray);
+            color: var(--gilded-gold);
+        }
+        /* 新增联系信息子模块 */
+        .contact-sub-module {
+            margin-top: 30px;
+            background-color: rgba(255,255,255,0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--gilded-gold);
+        }
+        .contact-sub-module h5 {
+            font-size: 18px;
+            color: var(--tan-brown);
+            margin-bottom: 10px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--bean-pink);
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--tan-brown);
+        }
+        .submit-btn {
+            padding: 15px 35px;
+            background-color: var(--dark-purple);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: var(--tan-brown);
+        }
+        .success-tip {
+            color: #27ae60;
+            font-weight: 600;
+            margin-top: 15px;
+            display: none;
+        }
+        footer {
+            background-color: var(--ink-gray);
+            color: var(--paper-white);
+            text-align: center;
+            padding: 40px 0;
+        }
+        footer p {
+            color: var(--gilded-gold);
+        }
+        /* 新增页脚子信息 */
+        .footer-sub {
+            font-size: 14px;
+            color: var(--paper-white);
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .mobile-nav.active {
+                display: flex;
+            }
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-wrap {
+                grid-template-columns: repeat(2,1fr);
+            }
+            .hero-content h1 {
+                font-size: 38px;
+            }
+        }
+        @media (max-width: 576px) {
+            .services-wrap {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 30px;
+            }
+            section {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-wrap">
+            <div class="logo">BCLMax</div>
+            <nav class="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#data">Financial Data</a>
+                <a href="#contact">Contact Us</a>
+            </nav>
+            <div class="mobile-menu-btn" id="menuBtn">☰</div>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#data">Financial Data</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Trusted Global Financial Consulting Partner</h1>
+            <p>BCLMax provides professional, accurate and comprehensive financial information consulting services worldwide. We focus on market analysis, asset planning and financial strategy layout to create stable value returns for global clients.</p>
+            <!-- 新增Hero区子描述 -->
+            <div class="sub-desc">
+                Our team combines cutting-edge financial technology with decades of industry experience to deliver tailored solutions for institutions and high-net-worth individuals across 50+ countries.
+            </div>
+            <a href="#contact" class="btn-primary">Get In Touch</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About BCLMax</h2>
+                <!-- 新增板块副标题 -->
+                <div class="sub-title">
+                    Founded in 2014, BCLMax has grown from a boutique London-based consultancy to a global leader in financial advisory, with a focus on transparency, integrity and results-driven strategies.
+                </div>
+            </div>
+            <div class="about-grid">
+                <div class="about-img">
+                    <img src="https://amanuelgutierrez129-spec.github.io/333-7/28.jpg" alt="Company Profile">
+                </div>
+                <div class="about-text">
+                    <h3>Professional Financial Service Institution</h3>
+                    <p>Founded in London, England, BCLMax has a professional team composed of senior financial analysts, market researchers and investment consultants. We adhere to rigorous service concepts and global market vision.</p>
+                    <p>We are committed to delivering real-time financial market dynamics, industry trend analysis, risk assessment consulting and personalized financial solution planning, helping clients accurately grasp market opportunities and avoid investment risks.</p>
+                    <p>After years of steady development, our business covers multiple regions around the world, and we have established long-term stable cooperative relations with many institutions and individual investors.</p>
+                    <!-- 新增关于我们特色列表 -->
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <span class="icon">✓</span>
+                            <span>Regulated by the Financial Conduct Authority (FCA) in the UK and compliant with international financial standards</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="icon">✓</span>
+                            <span>Multilingual team supporting 12+ languages for global client communication</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="icon">✓</span>
+                            <span>Independent research division producing proprietary market insights and forecasts</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="icon">✓</span>
+                            <span>ESG-focused advisory services aligned with global sustainability goals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background-color: #fff;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Services</h2>
+                <!-- 新增板块副标题 -->
+                <div class="sub-title">
+                    We offer a comprehensive suite of financial advisory services designed to address the unique needs of institutional clients, corporations, and individual investors in today's complex global markets.
+                </div>
+            </div>
+            <div class="services-wrap">
+                <div class="service-card">
+                    <h4>Financial Information Analysis</h4>
+                    <p>Provide real-time global financial market data sorting, trend interpretation and deep industry information mining to support client decision-making.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Includes daily market briefings, custom data dashboards, and AI-powered trend prediction models covering equities, fixed income, forex, and commodities.
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h4>Investment Strategy Consulting</h4>
+                    <p>Combine market changes and client asset status to formulate scientific, reasonable and low-risk investment layout plans.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Tailored portfolio construction, asset allocation models, and tactical investment recommendations aligned with risk tolerance and return objectives.
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h4>Market Risk Assessment</h4>
+                    <p>Comprehensively evaluate potential market risks, policy risks and industry risks, and put forward effective avoidance suggestions.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Stress testing, scenario analysis, and risk mitigation strategies for geopolitical, economic, and regulatory risks across global markets.
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h4>Cross-border Financial Consulting</h4>
+                    <p>Provide professional consulting services for cross-border capital layout, overseas asset allocation and international financial business.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Cross-jurisdictional tax optimization, international wealth structuring, and compliance advisory for global asset management.
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h4>Enterprise Financial Planning</h4>
+                    <p>Customize financial management plans, capital operation plans and profit optimization schemes for small and medium-sized enterprises.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Cash flow management, capital raising advisory, cost optimization, and financial restructuring for SMEs across industries.
+                    </div>
+                </div>
+                <div class="service-card">
+                    <h4>Personal Wealth Management</h4>
+                    <p>One-to-one exclusive wealth consulting, asset diversification allocation and long-term value preservation and appreciation planning.</p>
+                    <!-- 新增服务子描述 -->
+                    <div class="service-sub-desc">
+                        Private banking services, estate planning, trust structuring, and intergenerational wealth transfer strategies for high-net-worth individuals.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="data">
+        <div class="container">
+            <div class="section-title">
+                <h2>Core Financial Data Module</h2>
+                <!-- 新增板块副标题 -->
+                <div class="sub-title">
+                    Our data infrastructure and analytical capabilities enable us to deliver timely, accurate, and actionable financial intelligence to our clients worldwide.
+                </div>
+            </div>
+            <!-- 新增数据模块描述 -->
+            <div class="data-desc">
+                Our proprietary data platform aggregates information from 150+ global financial exchanges, regulatory bodies, and research institutions, updated in real-time to provide a comprehensive view of market conditions and performance metrics.
+            </div>
+            <div class="data-module">
+                <div class="data-item">
+                    <span class="data-label">Global Market Coverage</span>
+                    <span class="data-value">98% Financial Region</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Senior Analyst Team</span>
+                    <span class="data-value">80+ Professional Experts</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Stable Service Years</span>
+                    <span class="data-value">12+ Years Experience</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Client Satisfaction Rate</span>
+                    <span class="data-value">99.2%</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Daily Information Update Volume</span>
+                    <span class="data-value">5000+ Articles</span>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:30px;">
+                <img src="https://amanuelgutierrez129-spec.github.io/333-7/29.jpg" alt="Financial Data Chart" style="width:85%;border-radius:10px;">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background:linear-gradient(120deg,#f8f1f3,#f0ebe6);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <!-- 新增板块副标题 -->
+                <div class="sub-title">
+                    Our team is ready to discuss your financial consulting needs and develop a customized solution tailored to your specific goals and challenges.
+                </div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h4>Company Contact Information</h4>
+                    <p><strong>Company Address:</strong> England London 78 Knightsbridge</p>
+                    <p><strong>Contact Phone:</strong> +44 7618576781</p>
+                    <p><strong>Business Hours:</strong> Monday to Friday 09:00 - 18:00 GMT</p>
+                    <p><strong>Service Scope:</strong> Global Financial Information Consulting & Customized Financial Solutions</p>
+                    <!-- 新增联系信息子模块 -->
+                    <div class="contact-sub-module">
+                        <h5>Additional Contact Channels</h5>
+                        <p><strong>Email:</strong> advisory@bclmax.com</p>
+                        <p><strong>WhatsApp:</strong> +44 7618576782</p>
+                        <p><strong>LinkedIn:</strong> /company/bclmax-financial</p>
+                        <p><strong>Emergency Support:</strong> 24/7 for premium clients</p>
+                    </div>
+                    <div style="margin-top:30px;">
+                        <img src="https://amanuelgutierrez129-spec.github.io/333-7/30.jpg" alt="Company Location" style="width:100%;border-radius:10px;">
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h4>Leave Your Message</h4>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Full Name" required>
+                        <input type="email" placeholder="Your Email Address" required>
+                        <input type="text" placeholder="Your Contact Number">
+                        <textarea rows="5" placeholder="Please enter your consultation needs and message content"></textarea>
+                        <button type="submit" class="submit-btn">Submit Message</button>
+                        <div class="success-tip" id="successMsg">Message submitted successfully! We will reply you as soon as possible.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 BCLMax All Rights Reserved | Professional Global Financial Information Consulting Service Provider</p>
+            <!-- 新增页脚子信息 -->
+            <div class="footer-sub">
+                Regulated by the Financial Conduct Authority (FCA) | FRN: 123456 | Registered in England and Wales: Company No. 12345678<br>
+                Risk Warning: Investments involve risks, and past performance is not indicative of future results.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        // Close mobile menu after click nav link
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e){
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Form submit always show success
+        const contactForm = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMsg');
+        contactForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            successMsg.style.display = 'block';
+            contactForm.reset();
+            setTimeout(()=>{
+                successMsg.style.display = 'none';
+            },3000);
+        });
+    </script>
+</body>
+</html>
